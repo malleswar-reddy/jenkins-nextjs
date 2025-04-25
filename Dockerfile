@@ -33,4 +33,4 @@ EXPOSE 3000
 
 # Use PM2 to run the app (see pm2.config.js below)
 RUN npm install pm2 -g
-CMD ["pm2-runtime", "pm2.config.js"]
+CMD ["pm2-runtime", "pm2.config.ts"]
