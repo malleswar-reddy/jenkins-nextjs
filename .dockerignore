@@ -1,0 +1,12 @@
+node_modules
+.next
+*.log
+*.test.js
+*.spec.js
+*.md
+.git
+.gitignore
+Dockerfile
+docker-compose*
+.env*
+README*
