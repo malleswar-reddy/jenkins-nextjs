@@ -6,25 +6,18 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json only
 COPY package*.json ./
+RUN npm install
 
-# Install production dependencies only
-RUN npm ci --omit=dev
-
-# Copy only necessary source code (after pruning)
+# Copy all code
 COPY . .
 
-# Build Next.js app
+# Build Next.js app (requires tailwind/postcss)
 RUN npm run build
 
-# Expose port
+# Prune devDependencies (optional but recommended for smaller image)
+RUN npm prune --omit=dev
+
 EXPOSE 3000
 
 # Start app
 CMD ["npm", "start"]
-# Use a non-root user to run the app
-# USER node
-# CMD ["node", "server.js"]
-# Use a non-root user to run the app
-# USER node
-# CMD ["node", "server.js"]
-# Use a non-root user to run the app
