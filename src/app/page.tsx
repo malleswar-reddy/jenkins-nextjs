@@ -15,6 +15,9 @@ export default function Home() {
         className="mt-8 rounded-lg shadow-lg"
       />
       <h1>Hello Welcome to Jenkins Todo</h1>
+      <p className="mt-4 text-lg">
+        Your one-stop solution for order management.
+      </p>
     </div>
   );
 }
