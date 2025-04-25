@@ -1,31 +1,34 @@
-/** @type {import('next').NextConfig} */
-// Removed unused import of TerserPlugin
-const TerserPlugin = require("terser-webpack-plugin");
-const nextConfig = {
-  reactStrictMode: true, // Helps catch common bugs
-  swcMinify: true, // Smaller and faster builds (default in latest Next.js)
-  poweredByHeader: false, // Hide "X-Powered-By: Next.js"
-  compress: true, // Gzip compression for faster delivery
+import { NextConfig } from "next";
+import TerserPlugin from "terser-webpack-plugin";
+import { Configuration } from "webpack";
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  poweredByHeader: false,
+  compress: true,
   images: {
-    domains: ["your-cdn.com"], // Set this if you use remote images
+    domains: ["your-cdn.com"],
   },
-
-  webpack(config, { dev, isServer }) {
-    // Ensure the import statement is valid in this context
+  webpack(
+    config: Configuration,
+    { dev, isServer }: { dev: boolean; isServer: boolean }
+  ) {
     if (!dev && !isServer) {
-      config.optimization.minimizer.push(
-        new TerserPlugin({
-          terserOptions: {
-            compress: {
-              drop_console: true,
+      if (config.optimization?.minimizer) {
+        config.optimization.minimizer.push(
+          new TerserPlugin({
+            terserOptions: {
+              compress: {
+                drop_console: true,
+              },
             },
-          },
-        })
-      );
+          })
+        );
+      }
     }
-
     return config;
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
