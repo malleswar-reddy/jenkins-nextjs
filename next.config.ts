@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 // Removed unused import of TerserPlugin
+const TerserPlugin = require("terser-webpack-plugin");
 const nextConfig = {
   reactStrictMode: true, // Helps catch common bugs
   swcMinify: true, // Smaller and faster builds (default in latest Next.js)
@@ -11,7 +12,6 @@ const nextConfig = {
 
   webpack(config, { dev, isServer }) {
     // Ensure the import statement is valid in this context
-    import TerserPlugin from "terser-webpack-plugin";
     if (!dev && !isServer) {
       config.optimization.minimizer.push(
         new TerserPlugin({
