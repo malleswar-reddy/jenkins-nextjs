@@ -26,7 +26,7 @@ RUN npm install --omit=dev
 COPY --from=builder /app/.next .next
 COPY --from=builder /app/public public
 COPY --from=builder /app/next.config.ts ./
-COPY --from=builder /app/pm2.config.ts ./  # optional, if you use PM2
+COPY --from=builder /app/pm2.config.ts ./
 
 # Expose the app port
 EXPOSE 3000
